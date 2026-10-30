@@ -32,6 +32,14 @@
       { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
     );
     revealables.forEach((el) => io.observe(el));
+    // backstop: everything becomes visible on a timer even if
+    // the observer never fires (slow loads, capture tools, odd viewports)
+    setTimeout(() => {
+      revealables.forEach((el) => {
+        if (el.hasAttribute("data-reveal-img")) el.setAttribute("data-reveal-img", "visible");
+        else el.setAttribute("data-reveal", "visible");
+      });
+    }, 2200);
   }
 
   /* ---------- animated counters ---------- */
