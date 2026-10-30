@@ -393,22 +393,27 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 .visit-line .v a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--red);text-decoration-thickness:1.5px}
 .visit-line .v a:hover{color:var(--red-deep)}
 
-/* drawn map card */
+/* live google maps card */
 .map-card{
   border:1.5px solid var(--line-strong);background:var(--white);
-  overflow:hidden;text-decoration:none;display:block;
+  overflow:hidden;display:block;
   transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out);
 }
 .map-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px rgba(20,20,23,.14)}
-.map-card svg{display:block;width:100%;height:auto}
+.map-card .map-frame{position:relative;aspect-ratio:640/480;background:#E7E5E0}
+.map-card .map-frame iframe{
+  position:absolute;inset:0;width:100%;height:100%;border:0;
+  filter:grayscale(.55) contrast(1.04);
+  transition:filter .5s var(--ease-out);
+}
+.map-card:hover .map-frame iframe{filter:none}
 .map-card .map-foot{
   display:flex;justify-content:space-between;align-items:center;gap:14px;
   padding:16px 20px;border-top:1.5px solid var(--line-strong);
-  font-weight:700;font-size:14px;
+  font-weight:700;font-size:14px;text-decoration:none;color:inherit;
 }
-.map-card .map-foot .go{color:var(--red);display:inline-flex;align-items:center;gap:8px}
-.map-pin-pulse{animation:pinstep 2.2s var(--ease-out) infinite;transform-origin:center}
-@keyframes pinstep{0%{opacity:.9;r:6}70%{opacity:0;r:20}100%{opacity:0;r:20}}
+.map-card .map-foot:hover .go{color:var(--red-deep)}
+.map-card .map-foot .go{color:var(--red);display:inline-flex;align-items:center;gap:8px;transition:color .3s var(--ease-out)}
 
 /* ---------- final call band ---------- */
 .final{
