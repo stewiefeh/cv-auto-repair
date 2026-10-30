@@ -3,6 +3,8 @@
 (function () {
   "use strict";
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduced) document.documentElement.classList.add("js-reveal");
+  else document.documentElement.classList.add("no-anim");
 
   /* ---------- header ---------- */
   const header = document.getElementById("header");
@@ -36,13 +38,14 @@
   const counters = document.querySelectorAll("[data-count]");
   const runCount = (el) => {
     const target = parseInt(el.getAttribute("data-count"), 10);
-    if (reduced) { el.textContent = target; return; }
+    const from = parseInt(el.textContent, 10) || 0;
+    if (reduced || from === target) return;
     const dur = 1400;
     const t0 = performance.now();
     const tick = (t) => {
       const p = Math.min(1, (t - t0) / dur);
       const eased = 1 - Math.pow(1 - p, 4);
-      el.textContent = Math.round(target * eased);
+      el.textContent = Math.round(from + (target - from) * eased);
       if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
