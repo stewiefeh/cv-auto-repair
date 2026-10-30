@@ -1,4 +1,4 @@
-/* CV Mufflers & Auto Repair — "The Exhaust Note"
+/* CV Auto Repair — "The Exhaust Note"
    Motion: one signature line (the pulse), one drawn pipe, quiet reveals. */
 (function () {
   "use strict";
